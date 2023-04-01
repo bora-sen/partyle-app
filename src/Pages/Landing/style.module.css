@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer components {
+    .inner {
+        @apply bg-main h-[100dvh] w-full p-12 flex items-center md:justify-end;
+    }
+    .card {
+        @apply text-black md:w-[24rem] md:text-lg bg-white p-4 rounded-md h-auto;
+    }
+    .card h1 {
+        @apply font-bold text-3xl mb-6;
+    }
+    .card p {
+        @apply my-6;
+    }
+}
