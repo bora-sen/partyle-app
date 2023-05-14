@@ -1,1 +1,8 @@
+export { default as CreateEvent } from "./CreateEvent"
+export { default as EventPage } from "./EventPage"
+export { default as Events } from "./Events"
 export { default as Landing } from "./Landing"
+export { default as Login } from "./Login"
+export { default as MyTickets } from "./MyTickets"
+export { default as SignUp } from "./SignUp"
+export { default as Ticket } from "./Ticket"
