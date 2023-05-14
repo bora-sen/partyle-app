@@ -3,11 +3,10 @@ export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
-            backgroundImage: {
-                main: "url(/assets/media/landing-background.jpg)",
-            },
+            backgroundImage: {},
             fontFamily: {
                 "open-sans": ["Open Sans", "sans-serif"],
+                bevan: ["Bevan", "cursive"],
             },
         },
     },
