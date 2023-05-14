@@ -6,3 +6,17 @@
 * {
     font-family: "Open Sans", sans-serif;
 }
+@layer base {
+    .btn-black {
+        @apply bg-black text-white font-bold px-4 py-2;
+    }
+    .btn-white  {
+        @apply bg-white text-black font-bold px-4 py-2;
+    }
+    input{
+        @apply p-2 rounded-md
+    }
+    label{
+        @apply font-bold mb-2
+    }
+}
