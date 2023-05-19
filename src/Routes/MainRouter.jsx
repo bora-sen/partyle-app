@@ -11,10 +11,16 @@ import {
     Ticket,
 } from "../Pages"
 import ProtectedRoute from "./ProtectedRoute"
+import MyEvents from "../Pages/MyEvents"
+import NotFound from "../Pages/NotFound"
+import ScanTicket from "../Pages/ScanTicket"
 
 function MainRouter() {
     return (
         <Routes>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+
             <Route path="/welcome" element={<Landing />} />
             <Route
                 path="/"
@@ -48,9 +54,14 @@ function MainRouter() {
                     </ProtectedRoute>
                 }
             />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/create" element={<CreateEvent />} />
+            <Route
+                path="/create"
+                element={
+                    <ProtectedRoute redUrl="/login">
+                        <CreateEvent />
+                    </ProtectedRoute>
+                }
+            />
             <Route
                 path="/event/:uuid"
                 element={
@@ -59,6 +70,23 @@ function MainRouter() {
                     </ProtectedRoute>
                 }
             />
+            <Route
+                path="/myevents"
+                element={
+                    <ProtectedRoute>
+                        <MyEvents />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/scanticket/:eventId"
+                element={
+                    <ProtectedRoute>
+                        <ScanTicket />
+                    </ProtectedRoute>
+                }
+            />
+            <Route exact path="*" element={<NotFound />} />
         </Routes>
     )
 }
