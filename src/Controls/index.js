@@ -28,6 +28,15 @@ export async function GetRecentEventsByAmount() {
     }
 }
 
+export async function GetUserEvents(username) {
+    try {
+        const resp = await axios.get(`${api_url}/events/user/${username}`)
+        return resp.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export async function GetEventById(eventId) {
     try {
         const resp = await axios.get(`${api_url}/events/${eventId}`)
@@ -66,7 +75,7 @@ export async function CreateEvent(eventObj, accessToken) {
         const resp = await axios.post(`${api_url}/events/create`, eventObj, {
             headers: { Authorization: `Bearer ${accessToken}` },
         })
-        return resp
+        return resp.status
     } catch (error) {
         console.log(error)
     }
@@ -78,7 +87,7 @@ export async function DeleteEvent(eventId, accessToken) {
             data: { eventId },
             headers: { Authorization: `Bearer ${accessToken}` },
         })
-        return resp
+        return resp.status
     } catch (error) {
         console.log(error)
     }
