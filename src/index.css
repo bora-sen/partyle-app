@@ -8,13 +8,16 @@
 }
 @layer base {
     .btn-black {
-        @apply bg-black text-white font-bold px-4 py-2;
+        @apply bg-black text-white font-bold px-4 py-2 hover:bg-gray-600 transition-colors
     }
     .btn-white  {
         @apply bg-white text-black font-bold px-4 py-2;
     }
+    .box-shadow{
+        box-shadow: 5px 6px;
+    }
     input{
-        @apply p-2 rounded-md
+        @apply p-2 rounded-md border border-black
     }
     label{
         @apply font-bold mb-2
