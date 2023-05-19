@@ -23,6 +23,7 @@ function Header() {
                 <div className="flex items-center gap-12">
                     <span>{user.displayName}</span>
                     <a href="/mytickets">My Tickets</a>
+                    <a href="/myevents">My Events</a>
                     <button
                         onClick={(e) => {
                             handleLogout(e)
