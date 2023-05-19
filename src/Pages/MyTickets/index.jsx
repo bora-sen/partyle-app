@@ -3,6 +3,7 @@ import { GetUserTickets } from "../../Controls"
 import { AuthContext } from "../../Context/AuthContext"
 import { MainLayout } from "../../Layout"
 import QRCode from "react-qr-code"
+import { Link } from "react-router-dom"
 
 function MyTickets() {
     const [tickets, setTickets] = useState(false)
@@ -17,25 +18,29 @@ function MyTickets() {
     return (
         <MainLayout>
             <section className="">
-                <div className="p-12 flex flex-col gap-6">
+                <div className="p-12 flex gap-6">
                     {tickets !== false &&
                         tickets.map((ticket) => {
-                            console.log(ticket.eventDescription)
                             return (
-                                <div
+                                <Link
+                                    to={`/ticket/${ticket.uuid}`}
                                     key={ticket.uuid}
-                                    className="flex items-center"
+                                    className="flex flex-col items-center p-4 border-2 border-black hover:box-shadow transition-all"
                                 >
-                                    <div className="w-[10] h-[10]">
-                                        <QRCode value={ticket.publicId} />
-                                    </div>
+                                    <QRCode
+                                        className="w-36"
+                                        value={ticket.publicId}
+                                    />
                                     <div className="grid">
                                         <span className="text-2xl font-bold">
                                             {ticket.eventTitle}
                                         </span>
                                         <span>{ticket.eventDescription}</span>
                                     </div>
-                                </div>
+                                    <button className="btn-black mt-4">
+                                        Delete Ticket
+                                    </button>
+                                </Link>
                             )
                         })}
                 </div>

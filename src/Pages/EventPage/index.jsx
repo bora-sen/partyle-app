@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { generatePath, useParams } from "react-router-dom"
+import { Link, generatePath, useNavigate, useParams } from "react-router-dom"
 import { MainLayout } from "../../Layout"
 import { toast } from "react-hot-toast"
 import { GenerateTicket, GetEventById } from "../../Controls"
@@ -10,16 +10,17 @@ function EventPage() {
     const [event, setEvent] = useState(false)
     const { uuid } = useParams()
     const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
     useEffect(() => {
-        async function main() {
-            setEvent(await GetEventById(uuid))
-        }
-        main()
+        loadEvent()
     }, [])
 
-    function SuccessToast({ imageHash }) {
+    async function loadEvent() {
+        setEvent(await GetEventById(uuid))
+    }
+    function SuccessToast({ ticketId,imageHash }) {
         return (
-            <div className="border-2 border-black p-2 rounded-lg">
+            <Link to={`/ticket/${ticketId}`} className="border-2 border-black p-2 rounded-lg">
                 <div className="flex items-center gap-8">
                     <div className="w-[8rem] h-[8rem]">
                         <QRCode
@@ -29,19 +30,25 @@ function EventPage() {
                     </div>
                     <span>New Ticket Generated!!</span>
                 </div>
-            </div>
+            </Link>
         )
     }
     async function handleClick(e) {
         e.preventDefault()
-        const response = await GenerateTicket(
+        const resp = await GenerateTicket(
             event.uuid,
             event.title,
             event.description,
             user.accessToken
         )
-        const generatedTicket = response.data ?? false
-        toast.custom(<SuccessToast imageHash={generatedTicket.publicId} />)
+        if (resp.status === 200) {
+            const {uuid,publicId} = resp.data
+
+            toast.custom(<SuccessToast ticketId={uuid} imageHash={publicId} />)
+            navigate("/")
+        } else {
+            toast.error("Error")
+        }
     }
     return (
         <MainLayout>

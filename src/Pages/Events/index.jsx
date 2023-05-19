@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { MainLayout } from "../../Layout"
 import { GetRecentEventsByAmount } from "../../Controls"
+import { Link } from "react-router-dom"
 
 function Events() {
     const [events, setEvents] = useState(false)
@@ -18,11 +19,11 @@ function Events() {
                     {events !== false &&
                         events.map((eventObj) => {
                             return (
-                                <a
-                                    href={`/event/${eventObj.uuid}`}
+                                <Link
+                                    to={`/event/${eventObj.uuid}`}
                                     key={eventObj.uuid}
                                 >
-                                    <div className="bg-gray-300 w-[27rem] p-2">
+                                    <div className="w-[27rem] p-2 border-2 border-black hover:box-shadow transition-all">
                                         <div className="w-full aspect-video overflow-hidden">
                                             <img
                                                 src={eventObj.placeholderURL}
@@ -36,10 +37,7 @@ function Events() {
                                             </span>
                                             <div className="flex items-center justify-between">
                                                 <span className="text-xl">
-                                                    {
-                                                        eventObj.createdBy
-                                                            .username
-                                                    }
+                                                    {eventObj.createdBy}
                                                 </span>
                                                 <span className="text-xl">
                                                     {eventObj.createdAt}
@@ -50,13 +48,13 @@ function Events() {
                                             </span>
                                         </div>
                                     </div>
-                                </a>
+                                </Link>
                             )
                         })}
                 </div>
             </section>
             <section className="w-full h-[20rem] flex items-center justify-center font-bevan text-3xl bg-gray-900 text-white mt-6">
-                Create Event
+                <Link to="/create">Create Event</Link>
             </section>
         </MainLayout>
     )
